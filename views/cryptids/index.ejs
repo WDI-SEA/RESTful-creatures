@@ -1,0 +1,4 @@
+<h1>Cryptids</h1>
+<% for (foo of cryptids) { %>
+	<div class="cryptid-div"><img class="cryptid-img" src="<%=foo.img_url%>" alt="<%=foo.name%>"><span class="cryptid-name">&nbsp;<%=foo.name%><span></div>
+<% } %>
