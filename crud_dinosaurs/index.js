@@ -16,6 +16,7 @@ app.get('/', (req,res) => {
     res.render('home')
 })
 
+/*------------- DINOSAURS --------------*/
 //form route - has to come before show in order for show route to work properly
 app.get('/dinosaurs/new', (req, res) => {
     res.render('dinosaurs/new')
@@ -62,12 +63,65 @@ app.post('/dinosaurs', (req, res) => {
     dinosaurs.push(req.body)
 
     //save dinosaurs to the data json file
-    fs. writeFileSync('./dinosaurs.json', JSON.stringify(dinosaurs))
+    fs.writeFileSync('./dinosaurs.json', JSON.stringify(dinosaurs))
 
     //redirect to the GET /dinosaurs route (index)
     res.redirect('/dinosaurs')
 })
 
+/*------------- CRYPTIDS --------------*/
+app.get('/cryptids', (req, res) => {
+    let cryptids = fs.readFileSync('./cryptids.json')
+    let cryptidData = JSON.parse(cryptids)
+    res.render('cryptids/index', {myCryptids: cryptidData})
+})
+
+app.get('/cryptids/new', (req, res) => {
+    res.render('cryptids/new')
+})
+
+app.post('/cryptids', (req, res) => {
+    let cryptids = fs.readFileSync('./cryptids.json')
+    cryptids = JSON.parse(cryptids)
+
+    cryptids.push(req.body)
+
+    fs.writeFileSync('./cryptids.json', JSON.stringify(cryptids))
+
+    res.redirect('/cryptids')
+})
+
+app.get('/cryptids/:id', (req, res) => {
+    let cryptids = fs.readFileSync('./cryptids.json')
+    let cryptidData = JSON.parse(cryptids)
+
+    let crypIndex = parseInt(req.params.id)
+
+    res.render('cryptids/show', {myCryp: cryptidData[crypIndex]})
+})
 
 
-app.listen(8000)
+app.get('/cryptids/edit/:id', (req, res) => {
+    let cryptids = fs.readFileSync('./cryptids.json')
+    let cryptidData = JSON.parse(cryptids)
+
+    let crypIndex = parseInt(req.params.id)
+
+    res.render('cryptids/edit', {myCryp: cryptidData[crypIndex]})
+})
+
+// app.post('/cryptids', (req, res) => {
+//     let cryptids = fs.readFileSync('./cryptids.json')
+//     cryptids = JSON.parse(cryptids)
+
+//     cryptids[0] = req.body
+
+//     fs.writeFileSync('./cryptids.json', JSON.stringify(cryptids))
+
+//     res.redirect('/cryptids')
+// })
+
+
+app.listen(8000, () => {
+    console.log('👂🏻👂🏻👂🏻👂🏻')
+})
