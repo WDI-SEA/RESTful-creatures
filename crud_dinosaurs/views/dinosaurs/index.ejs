@@ -1,10 +1,10 @@
-<ul>
-    <% myDinos.forEach(dino => { %>
-        <li>
-            <%= dino.name %> is a <%= dino.type %>
-        </li>
+<div>
+    <% myDinos.forEach((dino, i) => { %>
+        <h2>
+           <a href="/dinosaurs/<%=i%>"> <%= dino.name %> </a>
+        </h2>
     <%})%>
-</ul>
+</div>
 
 <form method="GET" action="/dinosaurs">
     <label for="nameFilter">Filter by Name</label>

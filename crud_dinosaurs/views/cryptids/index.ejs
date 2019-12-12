@@ -1,9 +1,14 @@
 <h1>View All Cryptids</h1>
-<ul>
-    <% myCryptids.forEach(cryp => { %>
-        <li>
-            <%= cryp.name %>
-        </li>
+<div>
+    <% myCryptids.forEach((cryp, i) => { %>
+        <h2>
+            <%= cryp.name %>:
+            <a href="/cryptids/<%=i%>">Details</a>
+            <a href="/cryptids/edit/<%=i%>">Edit</a>
+            <form action ="/cryptids/<%=i%>/?_method=DELETE" method="POST">
+                <button type="submit">DELETE</button>
+            </form>
+        </h2>
     <%})%>
 
-</ul>
+</div>

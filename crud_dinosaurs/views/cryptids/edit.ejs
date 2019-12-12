@@ -1,12 +1,12 @@
 <h1>Editing Entry For <%= myCryp.name %></h1>
 <img src='<%= myCryp.img_url %>' height="200px">
 
-<form method="GET" action="/cryptids">
+<form method="POST" action="/cryptids/<%= myCryp.name%>/?_method=PUT">
     <label for="cryptidNameEdit">Edit Cryptid Name</label>
-    <input id="cryptidNameEdit" type="text" name="name">
+    <input id="cryptidNameEdit" type="text" name="name" value="<%= myCryp.name%>">
 
     <label for="newImageURL">New Image URL</label>
-    <input id="newImageURL" type="text" name="img_url">
+    <input id="newImageURL" type="text" name="img_url" value="<%= myCryp.img_url%>">
 
     <input type="submit">
 
