@@ -65,7 +65,7 @@ if (nameFilter) {
   res.render('dinosaurs/show', {myDino: dinoData[dinoIndex]});
 });
 
-res.render('dinosaurs/index', {myDinos: dinoData});
+// res.render('dinosaurs/index', {myDinos: dinoData});
 
 // lists all dinosaurs
 app.get('/cryptids', function(req, res) {
@@ -125,7 +125,7 @@ if (nameFilter) {
 });
 
 
-res.render('cryptids/index', {myCryptids: cryptData});
+// res.render('cryptids/index', {myCryptids: cryptData});
 
 
 // Listen on a port
