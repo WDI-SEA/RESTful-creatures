@@ -1,0 +1,21 @@
+<h1>THIS IS THE CRYPTIDS PAGE!</h1>
+
+<form method="GET" action="/cryptids">
+  <label for="nameFilter">Filter by Name</label>
+  <input id="nameFilter" type="text" name="nameFilter">
+  <input type="submit">
+</form>
+
+<div class="addCryptid">
+  <p><a href="/cryptids/new">ADD A NEW CRYPTID</a></p>
+</div>
+<ul>
+  <% myCryptids.forEach(function(cryptid, index) { %>
+  <li> <img src="<%= cryptid.img_url %>" alt="cryptids"> <%= cryptid.name %> is a <%= cryptid.type %>
+      <a href="/cryptid/edit/<%= index %>">Edit</a>
+      <form method="POST" action="/cryptids/<%= index %>/?_method=DELETE">
+          <input type="submit" value="Delete">
+      </form>
+  </li>
+  <% }); %>
+</ul>

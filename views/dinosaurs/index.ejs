@@ -1,24 +1,13 @@
 <h1>THIS IS THE DINOSAURS PAGE!</h1>
 
-<!-- <form method="GET" action="/dinosaurs">
-	<label for="nameFilter">Filter by Name</label>
-	<input id="nameFilter" type="text" name="nameFilter">
-	<input type="submit">
-  </form>
-
-<ul>
-	<% myDinos.forEach(function(dino) { %>
-	<li><%= dino.name %> is a <%= dino.type %></li>
-	<% }); %>
-</ul> -->
-
 <form method="GET" action="/dinosaurs">
   <label for="nameFilter">Filter by Name</label>
   <input id="nameFilter" type="text" name="nameFilter">
   <input type="submit">
 </form>
-​
-​
+<div class="addDino">
+  <p><a href="/dinosaurs/new">ADD A NEW DINOSAUR</a></p>
+</div>
 <ul>
   <% myDinos.forEach(function(dino, index) { %>
   <li><%= dino.name %> is a <%= dino.type %>
