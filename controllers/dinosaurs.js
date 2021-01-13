@@ -14,6 +14,19 @@ router.get('/new', (req, res) => {
     res.render('dinosaurs/new.ejs')
 })
 
+
+// Edit each dino. 
+router.get('/edit/:idx', (req, res) => {
+    let dinosaurs = fs.readFileSync('dinosaurs.json')
+    let dinoData = JSON.parse(dinosaurs)
+    let dinoIndex = req.params.idx
+    let myDino = dinoData[dinoIndex]
+    res.render('dinosaurs/edit.ejs', {
+        myDino: myDino,
+        myIndex: dinoIndex})
+})
+
+
 // 'Show' route
 router.get('/:idx', (req, res) => {
     // get dinosaur data from json file.
@@ -47,6 +60,26 @@ router.post('/', (req, res) => {
     fs.writeFileSync('dinosaurs.json', JSON.stringify(dinoData))
 
     // A redirect is a get request, so this redirects to the GET /dinosaurs route (index)
+    res.redirect('/dinosaurs')
+})
+
+router.delete('/:idx', (req, res) => {
+    let dinosaurs = fs.readFileSync('dinosaurs.json')
+    let dinoData = JSON.parse(dinosaurs)
+    dinoData.splice(req.params.idx, 1) // Remove 1 element starting at the idx index. Destructive method.
+    fs.writeFileSync('./dinosaurs.json', JSON.stringify(dinoData))
+    res.redirect('/dinosaurs')
+})
+
+router.put('/:idx', (req, res) => {
+    let dinosaurs = fs.readFileSync('dinosaurs.json')
+    let dinoData = JSON.parse(dinosaurs)
+    console.log(req.body)
+    dinoData[req.params.idx] = req.body
+    // dinoData[req.params.idx].name = req.body.name
+    // dinoData[req.params.idx].type = req.body.type
+    
+    fs.writeFileSync('./dinosaurs.json', JSON.stringify(dinoData))
     res.redirect('/dinosaurs')
 })
 

@@ -1,6 +1,12 @@
 <ul>
     <% myDinos.forEach((dino, i) => { %>
-        <li><a href='/dinosaurs/<%= i %>'><%= dino.name %></a> is a <%= dino.type %></li>
+        <li>
+            <a href='/dinosaurs/<%= i %>'><%= dino.name %></a> is a <%= dino.type %>
+            <form action="/dinosaurs/<%= i %>/?_method=DELETE" method="POST">
+                <input type="submit" value="Delete">
+            </form>
+        <!-- '/?_method=DELETE' triggers our override middleware. -->
+        </li>
     <% }) %>
 </ul>
 

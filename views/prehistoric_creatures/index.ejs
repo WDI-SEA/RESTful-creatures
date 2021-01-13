@@ -4,6 +4,9 @@
             <a href='prehistoric_creatures/<%=i%>'><%= creature.type %></a>
             <div>
                 <img height="70px" alt="<%= creature.type %>" src="<%= creature.img_url %>"></creature.img_url>
+                <form action='/prehistoric_creatures/<%=i%>/?_method=DELETE' method="POST">
+                    <input type="submit" value="Delete">
+                </form>
             </div>
         </li>
     <% }) %>

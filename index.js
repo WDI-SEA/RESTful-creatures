@@ -2,10 +2,14 @@ const express = require('express')
 const app = express()
 const layouts = require('express-ejs-layouts') // Because we're using express-ejs-layouts, we need to create a view/layouts.ejs.
 const fs = require('fs') // Built-in node module so we don't have to npm i it.
+const methodOverride = require('method-override') // Allows us to PUT and DELETE. 
 
 // Middleware
 app.set('view engine', 'ejs') // Because we're using ejs, we need a views folder. 
 app.use(layouts)
+
+app.use(methodOverride('_method')) // Needs to be placed above anything related to HTTP request objects, including body-parse middleware. 
+
 // Body-parser middleware. Form data passed across an HTTPS request is called a payload. Access this payload via req.body, and the below line allows us to access the data as a JavaScript object via req.body. Below line tells express what type of data to expect.
 app.use(express.urlencoded({extended: false}))
 
