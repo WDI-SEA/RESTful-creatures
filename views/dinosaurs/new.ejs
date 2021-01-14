@@ -1,0 +1,24 @@
+<form action="/dinosaurs" method="POST">
+    <label for="dinosaurType">Name</label>
+    <input id="dinosaurType" type="text" name="name">
+
+    <label for="dinosaurName">Type</label>
+    <input id="dinosaurName" type="text" name="type"> 
+<!-- name= "" is for the body or JSON object key name. -->
+
+
+    <input type="submit"> 
+</form>
+<!-- label for and id of input MUST match. -->
+
+<!-- 
+Method= HTTP verb, action= is associated with the route that we want this form to go to.
+In this example, submitting this form redirects to /dinosaurs.
+Then we'll create a post route that will handle the data that is entered into this form. 
+
+This form will be sent to a POST route (vs get route) with the URL /dinosaurs, because it has a post request.
+Has to match both HTTP verb AND URL pattern.
+
+GET retrieves data, POST sends data, PUT edits data
+-->
+
