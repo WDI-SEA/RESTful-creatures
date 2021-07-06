@@ -1,0 +1,14 @@
+<div>
+    <% myDinos.forEach((dino, i) => { %>
+        <h2>
+           <a href="/dinosaurs/<%=i%>"> <%= dino.name %> </a>
+        </h2>
+    <%})%>
+</div>
+
+<form method="GET" action="/dinosaurs">
+    <label for="nameFilter">Filter by Name</label>
+    <input id="nameFilter" type="text" name="nameFilter">
+    
+    <input type="submit">
+</form>
