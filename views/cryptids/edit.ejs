@@ -1,0 +1,14 @@
+<h1>Edit a cryptid's information!</h1>
+<h3>You are editing the following:</h3>
+<h4>NAME: <%= myCryptid.name %></h4>
+<h4>URL: <%= myCryptid.img_url %> </h4>
+
+<form method="POST" action="/cryptids">
+    <label for="cryptidImgUrl">Updated Img Url</label>
+    <input id="cryptidImgUrl" type="text" name="img_url">
+  
+    <label for="cryptidName">Updated Name</label>
+    <input id="cryptidName" type="text" name="name">
+  
+    <input type="submit">
+</form>
