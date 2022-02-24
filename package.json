@@ -1,0 +1,26 @@
+{
+  "name": "restful_creatures",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "express-ejs-layouts": "^2.5.1",
+    "method-override": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TaylorDarneille/spring_forward_RESTful_creatures.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TaylorDarneille/spring_forward_RESTful_creatures/issues"
+  },
+  "homepage": "https://github.com/TaylorDarneille/spring_forward_RESTful_creatures#readme",
+  "description": ""
+}
