@@ -1,53 +1,45 @@
-const express = require('express')
-const router = express.Router()
+let fs = require('fs')
+let router = require('express').Router()
 
-// index route
-router.get('/dinosaurs', (req, res)=>{
-    let dinosaurs = fs.readFileSync('./dinosaurs.json')
-    let dinoData = JSON.parse(dinosaurs)
-
-    let nameFilter = req.query.nameFilter
-    if(nameFilter){
-        // filter out all dinos who don't have the queried name
-        dinoData = dinoData.filter(dino=>{
-            return dino.name.toLowerCase() === nameFilter.toLowerCase()
-        })
-    }
-    res.render('index.ejs', {myDinos: dinoData})
-})
-    
-// new route (renders)
-router.get('/dinosaurs/new', (req, res)=>{
-    res.render('new.ejs')
+// DINOSAURS
+// lists all dinosaurs
+router.get('/', (req, res) => {
+  let dinosaurs = fs.readFileSync('./dinosaurs.json')
+  let dinoData = JSON.parse(dinosaurs)
+  res.render('dinosaurs/index', {myDinos: dinoData})
 })
 
-// show route - show all info about a single dino
-// : indicates that the following is a url parameter -- access via req.params
-router.get('/dinosaurs/:idx', (req, res)=>{
-    // read in the dinos from the db
-    let dinosaurs = fs.readFileSync('./dinosaurs.json')
-    let dinoData = JSON.parse(dinosaurs)
-    // extract the dino from corresponding to index
-    let dinoIndex = req.params.idx
-    let targetDino = dinoData[dinoIndex]
-    res.render('show.ejs', {dino: targetDino})
+router.post('/', (req, res) => {
+  // read dinosaurs file
+  let dinosaurs = fs.readFileSync('./dinosaurs.json');
+  dinosaurs = JSON.parse(dinosaurs);
+
+  // add item to dinosaurs array
+  dinosaurs.push(req.body);
+
+  // save dinosaurs to the data.json file
+  fs.writeFileSync('./dinosaurs.json', JSON.stringify(dinosaurs));
+
+  //redirect to the GET /dinosaurs route (index)
+  res.redirect('/dinosaurs/' + (dinosaurs.length - 1))
 })
 
-// post route
-router.post('/dinosaurs', (req, res)=>{
-    // read in our dino data from the json file
-    let dinosaurs = fs.readFileSync('./dinosaurs.json')
-    let dinoData = JSON.parse(dinosaurs)
-    // add the new dino to the dinoData array
-    dinoData.push(req.body)
-    // save the dinosaurs to the json file
-    // fs.writeFileSync takes two parameters 1.json file/database to pass into 2.the data to pass in (this was jsonified first)
-    fs.writeFileSync('./dinosaurs.json', JSON.stringify(dinoData))
-    // redirect back to the index route
-    // res.redirect takes the url pattern for the get route that you want to run next
-    res.redirect('/dinosaurs')
+// New dino form
+router.get('/new', (req, res) => {
+  res.render('dinosaurs/new')
+})
 
-    console.log(req.body)
+// express show route for dinosaurs (lists one dinosaur)
+router.get('/:idx', (req, res) => {
+  // get dinosaurs
+  let dinosaurs = fs.readFileSync('./dinosaurs.json')
+  let dinoData = JSON.parse(dinosaurs)
+
+  // get array index from url parameter
+  let dinoIndex = parseInt(req.params.idx)
+
+  // render page with data of the specified animal
+  res.render('dinosaurs/show', {myDino: dinoData[dinoIndex]})
 })
 
 module.exports = router

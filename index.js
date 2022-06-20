@@ -1,4 +1,4 @@
-/import packages
+
 const express = require('express');
 const ejslayouts = require('express-ejs-layouts');
 const { json } = require('express/lib/response');
